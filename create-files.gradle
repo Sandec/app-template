@@ -1,0 +1,17 @@
+def mkdirs(file) {
+    if(file.getParentFile().exists()) {
+        file.mkdir()
+    } else { mkdirs(file.getParentFile()) }
+}
+def saveContent(file,text) {
+    if(file.exists() && file.text != text) {
+        file.delete()
+    }
+    if(!file.exists()) {
+        mkdirs(file.getParentFile())
+        file.write(text)
+    }
+}
+
+//only for mobile, please!
+saveContent(new File("mobile/src/main/resources/application.conf"), new File("config/$env/client.conf").text)

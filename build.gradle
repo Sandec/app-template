@@ -1,0 +1,153 @@
+System.setProperty("file.encoding", "UTF-8")
+
+project.ext {
+    env = MYAPP_ENV
+}
+
+
+buildscript {
+    repositories {
+        jcenter()
+
+        maven {
+            url "http://sandec.bintray.com/repo"
+        }
+    }
+
+    dependencies {
+        classpath "SANDEC:simplefx-plugin-gradle:$SIMPLEFX_VERSION"
+        classpath "com.sandec.jpro:jpro-plugin-gradle:$JPRO_VERSION"
+        classpath "org.javafxports:jfxmobile-plugin:$JAVAFX_MOBILE_VERSION"
+        classpath 'org.akhikhl.gretty:gretty:2.0.0'
+    }
+}
+
+configure([project(':shared'),project(':client'),project(':server'),project(':mobile'),project(':web')]) {
+    apply plugin: 'java'
+    apply plugin: 'de.sandec.simplefx'
+
+    repositories {
+        jcenter()
+        maven {
+            url "http://sandec.bintray.com/repo"
+        }
+    }
+
+    compileJava {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    dependencies {
+        testCompile 'junit:junit:4.12'
+    }
+}
+
+configure([project(':shared')]) {
+    dependencies {
+        compile "SANDEC:simplefx-remoting-shared:$SIMPLEFX_REMOTING_VERSION"
+    }
+}
+
+
+configure([project(':client')]) {
+
+    apply plugin: 'com.sandec.jpro'
+    apply plugin: 'org.javafxports.jfxmobile'
+
+    mainClassName = 'myapp.client.Starter'
+
+    applicationDefaultJvmArgs = ["-Dconfig.file=../config/$env/client.conf"]
+
+    dependencies {
+
+        compile project(':shared')
+
+        compile "SANDEC:simplefx-remoting-client:$SIMPLEFX_REMOTING_VERSION"
+
+        compile "com.sandec.jpro:jpro-web-core:$JPRO_WEB_VERSION"
+
+        compile "com.sandec.jpro:jpro-crossplatform-desktop:$JPRO_CROSSPLATFORM"
+
+        compile "SANDEC:jnodes:$JNODES_VERSION"
+        compile "SANDEC:jnodes-devices:$JNODES_VERSION"
+    }
+
+}
+
+configure([project(':server')]) {
+    apply plugin: 'war'
+    apply plugin: 'org.akhikhl.gretty'
+
+    dependencies {
+        compile project(':shared')
+        compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.15'
+        compile "SANDEC:simplefx-remoting-server:$SIMPLEFX_REMOTING_VERSION"
+        compile 'com.h2database:h2:1.4.192'
+        compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.2.1'
+        compile "com.typesafe.slick:slick-hikaricp_$SCALA_VERSION:$SLICK_VERSION"
+        compile group: 'org.apache.commons', name: 'commons-email', version: '1.5'
+        compile "org.scalaj:scalaj-http_$SCALA_VERSION:2.4.1"
+    }
+
+    gretty {
+        servletContainer = "jetty9.4"
+        contextPath = "/"
+        integrationTestTask = 'client:test'
+        jetty9Version = "$JETTY_VERSION"
+        jvmArgs = ["-Dconfig.file=../config/$env/server.conf"]
+    }
+    test {
+        jvmArgs = ["-Dconfig.file=../config/$env/server.conf"]
+        testLogging.showStandardStreams = true
+    }
+}
+
+configure([project(':web')]) {
+
+    apply plugin: 'com.sandec.jpro'
+
+    applicationDefaultJvmArgs = ["-Dconfig.file=../config/$env/client.conf"]
+
+    mainClassName = project(':client').mainClassName
+
+    dependencies {
+        compile project(':client')
+
+        compile "com.sandec.jpro:jpro-crossplatform-jpro:$JPRO_CROSSPLATFORM"
+    }
+
+    jproStartCommand {
+        jvmArgs "-Dconfig.file=./config/$env/client.conf"
+    }
+
+    jpro {
+        port = 8081
+        openingPath = "/"
+    }
+}
+
+configure([project(':mobile')]) {
+
+    repositories {
+        jcenter()
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'application'
+    apply plugin: 'de.sandec.simplefx'
+    apply plugin: 'org.javafxports.jfxmobile'
+    apply plugin: 'com.sandec.jpro'
+
+    mainClassName = project(':client').mainClassName
+
+    dependencies {
+        compile project(':client')
+
+        iosRuntime "com.sandec.jpro:jpro-crossplatform-ios:$JPRO_CROSSPLATFORM"
+        androidRuntime "com.sandec.jpro:jpro-crossplatform-android:$JPRO_CROSSPLATFORM"
+    }
+    
+    // Here on might add more project specific gluon configurations
+
+}
