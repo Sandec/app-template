@@ -1,0 +1,9 @@
+
+.vbox {
+  -fx-alignment: center;
+}
+
+.entry {
+  -fx-text-size: 15;
+  -fx-pref-width: 400;
+}
