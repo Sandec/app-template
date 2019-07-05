@@ -71,6 +71,8 @@ configure([project(':client')]) {
 
         compile "SANDEC:jnodes:$JNODES_VERSION"
         compile "SANDEC:jnodes-devices:$JNODES_VERSION"
+
+        compile 'de.sandec.cssfx:cssfx:1.0.4'
     }
 
 }
