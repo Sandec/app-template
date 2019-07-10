@@ -4,7 +4,6 @@ project.ext {
     env = MYAPP_ENV
 }
 
-
 buildscript {
     repositories {
         jcenter()
@@ -18,7 +17,7 @@ buildscript {
         classpath "SANDEC:simplefx-plugin-gradle:$SIMPLEFX_VERSION"
         classpath "com.sandec.jpro:jpro-plugin-gradle:$JPRO_VERSION"
         classpath "org.javafxports:jfxmobile-plugin:$JAVAFX_MOBILE_VERSION"
-        classpath 'org.akhikhl.gretty:gretty:2.0.0'
+        classpath 'org.gretty:gretty:2.3.1'
     }
 }
 
@@ -72,14 +71,14 @@ configure([project(':client')]) {
         compile "SANDEC:jnodes:$JNODES_VERSION"
         compile "SANDEC:jnodes-devices:$JNODES_VERSION"
 
-        compile 'de.sandec.cssfx:cssfx:1.0.4'
+        compile "org.fxmisc.cssfx:cssfx:1.1.1"
     }
 
 }
 
 configure([project(':server')]) {
     apply plugin: 'war'
-    apply plugin: 'org.akhikhl.gretty'
+    apply plugin: 'org.gretty'
 
     dependencies {
         compile project(':shared')
