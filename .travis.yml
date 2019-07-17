@@ -6,5 +6,14 @@ jdk:
 os:
   - linux
 
-script:
-  - ./gradlew clean jar
+stages:
+  - compile
+  - test
+
+jobs:
+  include:
+    - stage: test
+      script:  ./gradlew clean jar
+
+    - stage: deploy
+      script:  ./gradlew server:test
