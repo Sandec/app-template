@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/Sandec/app-template.svg?branch=master)](https://travis-ci.com/Sandec/app-template)
 
 # Common Tasks
 
