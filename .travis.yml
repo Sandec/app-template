@@ -1,5 +1,7 @@
 language: java
 
+dist: xenial
+
 jdk:
   - openjdk11
 
@@ -20,8 +22,8 @@ cache:
 
 jobs:
   include:
-    - stage: test
+    - stage: compile
       script:  ./gradlew clean jar
 
-    - stage: deploy
+    - stage: test
       script:  ./gradlew server:test
