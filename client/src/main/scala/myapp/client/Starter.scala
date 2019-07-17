@@ -4,6 +4,9 @@ import org.fxmisc.cssfx.CSSFX
 import simplefx.all._
 import simplefx.core._
 
+object Starter11 extends App {
+  Starter.main(new Array(0))
+}
 object Starter extends App
 @SimpleFXApp class Starter { THIS =>
 

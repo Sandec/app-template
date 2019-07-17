@@ -43,8 +43,22 @@ configure([project(':shared'),project(':client'),project(':server'),project(':mo
 }
 
 configure([project(':shared')]) {
+
+    apply plugin: 'com.google.osdetector'
+
+    ext.platform = osdetector.os == 'osx' ? 'mac' : osdetector.os == 'windows' ? 'win' : osdetector.os
+
+
     dependencies {
         compile "SANDEC:simplefx-remoting-shared:$SIMPLEFX_REMOTING_VERSION"
+
+
+        compile "org.openjfx:javafx-base:$JAVAFX_VERSION:$platform"
+        compile "org.openjfx:javafx-graphics:$JAVAFX_VERSION:$platform"
+        compile "org.openjfx:javafx-controls:$JAVAFX_VERSION:$platform"
+        compile "org.openjfx:javafx-fxml:$JAVAFX_VERSION:$platform"
+        compile "org.openjfx:javafx-media:$JAVAFX_VERSION:$platform"
+        compile "org.openjfx:javafx-web:$JAVAFX_VERSION:$platform"
     }
 }
 
@@ -54,7 +68,7 @@ configure([project(':client')]) {
     apply plugin: 'com.sandec.jpro'
     apply plugin: 'org.javafxports.jfxmobile'
 
-    mainClassName = 'myapp.client.Starter'
+    mainClassName = 'myapp.client.Starter11'
 
     applicationDefaultJvmArgs = ["-Dconfig.file=../config/$env/client.conf"]
 
@@ -72,6 +86,8 @@ configure([project(':client')]) {
         compile "SANDEC:jnodes-devices:$JNODES_VERSION"
 
         compile "org.fxmisc.cssfx:cssfx:1.1.1"
+
+        compile 'org.scalaj:scalaj-http_2.11:2.4.2'
     }
 
 }
