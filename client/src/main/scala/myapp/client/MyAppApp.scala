@@ -7,6 +7,7 @@ import simplefx.core._
 
 class MyAppApp(stage: Stage) extends WebApp(stage) {
 
+  lib.PopupAPI.setPopupNode(this)
 
   addRoute { case ""                => new Redirect("/?page=main")}
   addRoute { case "/"               => new Redirect("/?page=main")}

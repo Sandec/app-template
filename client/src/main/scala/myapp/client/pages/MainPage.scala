@@ -5,6 +5,7 @@ import myapp.shared.util.SharedUtil._
 import simplefx.core._
 import simplefx.all._
 import com.jpro.web.Util.setLink
+import myapp.client.util.Popup._
 
 class MainPage extends DefaultPage { THIS =>
 
@@ -36,6 +37,12 @@ class MainPage extends DefaultPage { THIS =>
       this <++ new Button("Subpage") {
         setLink(this,"/?page=sub")
       }
+      this <++ new Button("InfoPopup") {
+        onAction --> {
+          showPopup(this,infoPopup("Hello!"))
+        }
+      }
+
     }
     this <++ entriesNode
   }
