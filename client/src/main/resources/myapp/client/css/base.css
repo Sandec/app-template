@@ -7,3 +7,13 @@
   -fx-font-size: 15;
   -fx-pref-width: 400;
 }
+
+
+.template-popup-background {
+  -fx-background-color: #00000044;
+}
+.template-popup-container {
+  -fx-background-color: white;
+  -fx-min-width:300;
+  -fx-min-height: 300;
+}
