@@ -1,6 +1,8 @@
 package myapp.server.site.api
 
-object AllAPIServer {
+import myapp.shared.api.AllAPI
+
+object AllAPIServer extends AllAPI {
 
   val entry = new EntryAPIServer
 
