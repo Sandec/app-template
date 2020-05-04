@@ -55,7 +55,7 @@ configure([project(':shared')]) {
     javafx {
         version = "$JAVAFX_VERSION"
         configuration = 'compile'
-        modules = [ 'javafx.base', 'javafx.graphics', 'javafx.controls', 'javafx.fxml', 'javafx.media', 'javafx.web' ]
+        modules = [ 'javafx.base', 'javafx.graphics', 'javafx.controls', 'javafx.fxml', 'javafx.media', 'javafx.web', 'javafx.swing' ]
     }
 }
 
@@ -72,21 +72,24 @@ configure([project(':client')]) {
     applicationDefaultJvmArgs = ["-Dconfig.file=../config/$env/client.conf"]
 
     dependencies {
-
         compile project(':shared')
-
         compile "SANDEC:simplefx-remoting-client:$SIMPLEFX_REMOTING_VERSION"
-
         compile "com.sandec.jpro:jpro-web-core:$JPRO_WEB_VERSION"
-
         compile "com.sandec.jpro:jpro-crossplatform-desktop:$JPRO_CROSSPLATFORM"
-
         compile "SANDEC:jnodes:$JNODES_VERSION"
         compile "SANDEC:jnodes-devices:$JNODES_VERSION"
-
         compile "org.fxmisc.cssfx:cssfx:$CSSFX_VERSION"
-
         compile "org.scalaj:scalaj-http_$SCALA_VERSION:2.4.2"
+    }
+
+    runtime {
+        options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+        modules = ['jdk.unsupported']
+
+        jpackage {
+            imageOptions = ['--icon', 'src/main/resources/myapp/logo.icns']
+            imageName = "app-template-client"
+        }
     }
 
 }

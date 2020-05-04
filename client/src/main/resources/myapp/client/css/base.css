@@ -1,6 +1,7 @@
 
 .vbox {
   -fx-alignment: center;
+  -fx-background-color: green;
 }
 
 .entry {
