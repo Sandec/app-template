@@ -30,12 +30,13 @@ configure([project(':shared'),project(':client'),project(':server'),project(':mo
         maven {
             url "http://sandec.bintray.com/repo"
         }
+        maven {
+            url 'https://nexus.gluonhq.com/nexus/content/repositories/releases/'
+        }
     }
 
-    compileJava {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
-    }
+    targetCompatibility = "8"
+    sourceCompatibility = "8"
 
     dependencies {
         testCompile 'junit:junit:4.12'
@@ -66,9 +67,9 @@ configure([project(':shared')]) {
 configure([project(':client')]) {
 
     apply plugin: 'com.sandec.jpro'
-    apply plugin: 'org.javafxports.jfxmobile'
+    //apply plugin: 'org.javafxports.jfxmobile'
 
-    mainClassName = 'myapp.client.Starter11'
+    mainClassName = 'myapp.client.Starter'
 
     applicationDefaultJvmArgs = ["-Dconfig.file=../config/$env/client.conf"]
 
@@ -85,9 +86,9 @@ configure([project(':client')]) {
         compile "SANDEC:jnodes:$JNODES_VERSION"
         compile "SANDEC:jnodes-devices:$JNODES_VERSION"
 
-        compile "org.fxmisc.cssfx:cssfx:1.1.1"
+        compile "org.fxmisc.cssfx:cssfx:$CSSFX_VERSION"
 
-        compile 'org.scalaj:scalaj-http_2.11:2.4.2'
+        compile "org.scalaj:scalaj-http_$SCALA_VERSION:2.4.2"
     }
 
 }
@@ -152,17 +153,17 @@ configure([project(':mobile')]) {
 
     apply plugin: 'java'
     apply plugin: 'application'
-    apply plugin: 'de.sandec.simplefx'
-    apply plugin: 'org.javafxports.jfxmobile'
+    //apply plugin: 'org.javafxports.jfxmobile'
     apply plugin: 'com.sandec.jpro'
+
 
     mainClassName = project(':client').mainClassName
 
     dependencies {
         compile project(':client')
 
-        iosRuntime "com.sandec.jpro:jpro-crossplatform-ios:$JPRO_CROSSPLATFORM"
-        androidRuntime "com.sandec.jpro:jpro-crossplatform-android:$JPRO_CROSSPLATFORM"
+    //    iosRuntime "com.sandec.jpro:jpro-crossplatform-ios:$JPRO_CROSSPLATFORM"
+    //    androidRuntime "com.sandec.jpro:jpro-crossplatform-android:$JPRO_CROSSPLATFORM"
     }
     
     // Here on might add more project specific gluon configurations

@@ -1,5 +1,6 @@
 package myapp.client
 
+import com.jpro.web.sessionmanager.SessionManager
 import org.fxmisc.cssfx.CSSFX
 import simplefx.all._
 import simplefx.core._
@@ -12,10 +13,11 @@ object Starter extends App
 
   val app = new MyAppApp(stage)
 
-  CSSFX.start
+  //CSSFX.start
+  //CSSFX.start(stage)
 
   scene = new Scene(app,900,700)
   app.stylesheets ::= getClass.getResource("/myapp/client/css/base.css").toURI.toString
 
-  app.start()
+  app.start(SessionManager.getDefault(app,stage))
 }

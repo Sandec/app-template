@@ -39,7 +39,7 @@ class MainPage extends DefaultPage { THIS =>
       }
       this <++ new Button("InfoPopup") {
         onAction --> {
-          showPopup(this,infoPopup("Hello!"))
+          showPopup(this,infoPopup("Title","Hello"))
         }
       }
 
