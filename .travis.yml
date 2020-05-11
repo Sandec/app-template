@@ -35,14 +35,12 @@ jobs:
 
     - os: windows
       stage: publishWindows
-      language: bash
-      env:
-        - JAVA_HOME=C:\\Program\ Files\\adoptopenjdk\\jdk-14.0.1+7
 
 
       install:
         - choco install powershell
         - choco install adoptopenjdk --version 14.0.1.7
+        - export JAVA_HOME='C:\Program Files\adoptopenjdk\jdk-14.0.1+7'
       #  - choco install innosetup # it's allready installed!
 
       script:
