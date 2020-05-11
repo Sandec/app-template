@@ -48,7 +48,7 @@ jobs:
         - export JAVA_HOME='C:\Program Files\adoptopenjdk\jdk-14.0.1.7-hotspot'
         - choco install nuget.commandline
         - nuget install WiX.Toolset
-        - export PATH="$PATH;.\WiX.Toolset.3.9.1208.0\tools\wix\"
+        - export PATH=$PATH;.\WiX.Toolset.3.9.1208.0\tools\wix\
         - echo $PATH
         - ls 'C:\Program Files\adoptopenjdk'
         - dir 'C:\Program Files\adoptopenjdk'
