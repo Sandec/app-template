@@ -41,6 +41,9 @@ jobs:
       stage: publishWindows
       language: bash
 
+      before_install:
+        - powershell Install-WindowsFeature Net-Framework-Core
+        - cinst -y wixtoolset
 
       install:
         - choco install powershell
