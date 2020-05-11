@@ -48,4 +48,4 @@ jobs:
 
       script:
         - chmod +x releaseWindows.bat
-        - ./gradlew publishWIN --info
+        - ./gradlew publishMSI --info
