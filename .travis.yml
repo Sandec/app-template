@@ -35,6 +35,7 @@ jobs:
 
     - os: windows
       stage: publishWindows
+      language: bash
 
 
       install:
