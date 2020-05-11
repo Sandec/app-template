@@ -46,9 +46,12 @@ jobs:
         - choco install powershell
         - choco install adoptopenjdk --version 14.0.1.7
         - export JAVA_HOME='C:\Program Files\adoptopenjdk\jdk-14.0.1.7-hotspot'
+        - choco install nuget.commandline
+        - nuget install WiX.Toolset
+        - export PATH=$PATH:.\WiX.Toolset.3.9.1208.0\tools\wix\"
         - ls 'C:\Program Files\adoptopenjdk'
         - dir 'C:\Program Files\adoptopenjdk'
       #  - choco install innosetup # it's allready installed!
 
       script:
-        - ./gradlew.bat publishMSI --info --stacktrace
+        - ./gradlew.bat client:jpackager publishMSI --info --stacktrace
