@@ -51,4 +51,4 @@ jobs:
       #  - choco install innosetup # it's allready installed!
 
       script:
-        - ./gradlew.bat publishMSI --info
+        - ./gradlew.bat publishMSI --info --stacktrace
