@@ -23,6 +23,8 @@ cache:
   directories:
     - $HOME/.gradle
 
+jobs:
+  include:
     - os: osx
       stage: publishmac
       jdk:
