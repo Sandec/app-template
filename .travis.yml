@@ -36,6 +36,8 @@ jobs:
     - os: windows
       stage: publishWindows
       language: bash
+      env:
+        - JAVA_HOME=C:\Program Files\adoptopenjdk\jdk-14.0.1+7
 
 
       install:
