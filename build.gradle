@@ -184,7 +184,7 @@ configure([project(':mobile')]) {
 }
 
 def bintrayRepo = "sandec/private/"
-def bintrayKey = "-u$BINTRAY_USER:$BINTRAY_KEY"
+def bintrayKey = "-u${System.getenv('BINTRAY_USER')}:${System.getenv('BINTRAY_KEY')}"
 
 task publishDMG(type: Exec, dependsOn: ["client:jpackage"]) {
 
