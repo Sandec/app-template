@@ -35,7 +35,7 @@ jobs:
         - openjdk14
       language: java
       script:
-        - export JAVA_HOME=$HOME/openjdk11
+        - export JAVA_HOME=$HOME/openjdk14
         - ./gradlew publishDMG --info  -Dorg.gradle.daemon=false
 
     - os: windows
