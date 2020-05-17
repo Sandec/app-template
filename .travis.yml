@@ -35,7 +35,7 @@ jobs:
         - openjdk14
       language: java
       script:
-        - ./gradlew publishDMG --info
+        - ./gradlew publishDMG --info  -Dorg.gradle.daemon=false
 
     - os: windows
       stage: publishWindows
@@ -60,4 +60,4 @@ jobs:
       #  - choco install innosetup # it's allready installed!
 
       script:
-        - ./gradlew.bat client:jpackage publishMSI --info --stacktrace
+        - ./gradlew.bat client:jpackage publishMSI --info --stacktrace  -Dorg.gradle.daemon=false
