@@ -1,9 +1,9 @@
 language: java
 
-dist: xenial
+dist: bionic
 
 jdk:
-  - openjdk11
+  - openjdk14
 
 os:
   - linux
@@ -35,6 +35,7 @@ jobs:
         - openjdk14
       language: java
       script:
+        - echo $JAVA_HOME
         - ./gradlew publishDMG --info  -Dorg.gradle.daemon=false
 
     - os: windows
