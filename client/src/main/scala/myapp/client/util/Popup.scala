@@ -13,12 +13,15 @@ object Popup extends PopupAPI{
     @Bind var title = "Title"
     @Bind var buttons = List.empty[Button]
     @Bind var content: Node = Group()
-    //fillHeight = true
+
     alignment = Pos.CENTER
     styleClass ::= "template-popup-background"
 
     padding = Insets(50)
     this <++ new ScrollPane {
+      fitToHeight = true
+      fitToWidth = true
+
       maxHeightProp = javafx.scene.layout.Region.USE_PREF_SIZE
       maxWidthProp = javafx.scene.layout.Region.USE_PREF_SIZE
 
