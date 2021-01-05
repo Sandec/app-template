@@ -1,7 +1,7 @@
 package myapp.client
 
 import com.jpro.web.sessionmanager.SessionManager
-import org.fxmisc.cssfx.CSSFX
+import fr.brouillard.oss.cssfx.CSSFX
 import simplefx.all._
 import simplefx.core._
 

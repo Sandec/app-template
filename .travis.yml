@@ -30,7 +30,7 @@ before_install:
 jobs:
   include:
     - os: osx
-      osx_image: xcode11.4
+      osx_image: xcode11.4 # This also defines the JDK Version
       stage: publishmac
       language: java
       script:
@@ -59,4 +59,4 @@ jobs:
       #  - choco install innosetup # it's allready installed!
 
       script:
-        - ./gradlew.bat client:jpackage publishMSI --info --stacktrace  -Dorg.gradle.daemon=false
+        - ./gradlew.bat client:jpackage publishMSI --info --stacktrace -Dorg.gradle.daemon=false
